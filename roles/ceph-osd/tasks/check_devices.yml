@@ -77,7 +77,7 @@
 - name: fix partitions gpt header or labels of the osd disks
   shell: sgdisk --zap-all --clear --mbrtogpt -g -- {{ item.1 }}
   with_together:
-    - combined_osd_partition_status_results.results
+    - combined_osd_partition_status_results
     - devices
   changed_when: false
   when:
@@ -88,7 +88,7 @@
 - name: fix partitions gpt header or labels of the osd disks (autodiscover disks)
   shell: sgdisk --zap-all --clear --mbrtogpt -g -- "/dev/{{ item.1.key }}"
   with_together:
-    - combined_osd_partition_status_results.results
+    - combined_osd_partition_status_results
     - ansible_devices
   changed_when: false
   when:
