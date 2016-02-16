@@ -36,6 +36,13 @@
 - name: debug osd_auto_discovery
   debug: var=osd_auto_discovery
 
+- name: detailed debug
+  debug: msg="item_0={{ item.0 }} item_1={{ item.1 }} item_2={{ item.2 }}"
+  with_together:
+    - combined_parted_results.results
+    - combined_ispartition_results.results
+    - devices
+
 - name: manually prepare osd disk(s)
   command: "ceph-disk prepare {{ item.2 }}"
   ignore_errors: true
